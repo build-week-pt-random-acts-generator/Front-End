@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
+import styled from "styled-components";
 
 const NewUserForm = ({ errors, touched, values, status }) => {
   const [user, setUser] = useState([]);
@@ -13,40 +14,104 @@ const NewUserForm = ({ errors, touched, values, status }) => {
     }
   }, [status]);
 
+  const FormContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    width: 45%;
+  `;
+
   return (
     <Form>
-      <Field name="firstName" type="input" placeholder="First Name" />
+      <FormContainer>
+        <Field
+          name="username"
+          type="input"
+          placeholder="Username"
+          className="fieldFull"
+        />
+        {touched.username && errors.username && (
+          <p className="errors">{errors.username}</p>
+        )}
 
-      <Field name="lastName" type="input" placeholder="Last Name" />
+        <Field
+          name="password"
+          type="password"
+          placeholder="Password"
+          className="fieldFull"
+        />
+        {touched.password && errors.password && (
+          <p className="errors">{errors.password}</p>
+        )}
 
-      <Field name="email" type="email" placeholder="Email" />
+        <Field
+          name="name"
+          type="input"
+          placeholder="Name"
+          className="fieldFull"
+        />
+        {touched.name && errors.name && <p className="errors">{errors.name}</p>}
 
-      <Field name="password" type="password" placeholder="Password" />
+        <Field
+          name="address"
+          type="address"
+          placeholder="Address"
+          className="fieldFull"
+        />
+        {touched.address && errors.address && (
+          <p className="errors">{errors.address}</p>
+        )}
 
-      <button>Create User</button>
+        {touched.email && errors.email && (
+          <p className="errors">{errors.email}</p>
+        )}
+
+        <Field
+          name="email"
+          type="email"
+          placeholder="Email"
+          className="fieldFull"
+        />
+
+        <Field
+          name="phone"
+          type="phone"
+          placeholder="Phone Number"
+          className="fieldFull"
+        />
+        {touched.phone && errors.phone && (
+          <p className="errors">{errors.phone}</p>
+        )}
+
+        <div className="fieldFull">
+          <button type="submit">Create User</button>
+        </div>
+      </FormContainer>
     </Form>
   );
 };
 
 const FormikNewUserForm = withFormik({
-  mapPropsToValues({ firstName, lastName, email, password }) {
+  mapPropsToValues({ username, password, name, email, phone, address }) {
     return {
-      firstName: firstName || "",
-      lastName: lastName || "",
+      username: username || "",
+      password: password || "",
+      name: name || "",
       email: email || "",
-      password: password || ""
+      phone: phone || "",
+      address: address || ""
     };
   },
 
   validationSchema: Yup.object().shape({
-    firstName: Yup.string().required("Please add your first name"),
-    lastName: Yup.string().required("Please add your last name"),
-    email: Yup.string()
-      .email("Email not valid")
-      .required("Please add your first name"),
+    username: Yup.string().required("Please add your username"),
     password: Yup.string()
       .min(6, "Password must be 6 characters long")
-      .required("Invalid input")
+      .required("Invalid input"),
+    email: Yup.string()
+      .email("Email not valid")
+      .required("Please add your email")
   }),
 
   handleSubmit(values, { setStatus, resetForm }) {
