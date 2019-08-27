@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
-import styled from "styled-components";
 
-const NewUserForm = ({ errors, touched, values, status }) => {
+const SignUp = ({ errors, touched, values, status }) => {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
@@ -14,17 +13,10 @@ const NewUserForm = ({ errors, touched, values, status }) => {
     }
   }, [status]);
 
-  const FormContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 auto;
-    width: 45%;
-  `;
-
   return (
-    <Form>
-      <FormContainer>
+    <div>
+      <h1>Sign Up Below</h1>
+      <Form className="formContainer">
         <Field
           name="username"
           type="input"
@@ -87,12 +79,12 @@ const NewUserForm = ({ errors, touched, values, status }) => {
         <div className="fieldFull">
           <button type="submit">Create User</button>
         </div>
-      </FormContainer>
-    </Form>
+      </Form>
+    </div>
   );
 };
 
-const FormikNewUserForm = withFormik({
+const FormikSignUp = withFormik({
   mapPropsToValues({ username, password, name, email, phone, address }) {
     return {
       username: username || "",
@@ -116,16 +108,18 @@ const FormikNewUserForm = withFormik({
 
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://reqres.in/api/users", values)
+      // .post("https://reqres.in/api/users", values)
+      .post("https://random-acts0519.herokuapp.com/api/register", values)
       .then(result => {
         console.log("handleSubmit: ", result);
         setStatus(result.data);
-        resetForm();
+        resetForm("https://random-acts0519.herokuapp.com/api/register", values);
       })
+      .post()
       .catch(err => {
         console.log("handleSubmit: ", err);
       });
   }
-})(NewUserForm);
+})(SignUp);
 
-export default FormikNewUserForm;
+export default FormikSignUp;
