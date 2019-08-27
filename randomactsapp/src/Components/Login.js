@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
-import LoggedIn from "./LoggedIn.js";
-import LoggedOut from "./LoggedOut.js";
 
 const Login = ({ errors, touched, values, status }) => {
   // const [token, setToken, removeToken] = useCustomHook("token");
@@ -51,22 +49,6 @@ const Login = ({ errors, touched, values, status }) => {
     </div>
   );
 };
-
-// const useCustomHook = name => {
-//   const [storage, setStorage] = useState(localStorage.getItem(name));
-
-//   const placeInStorage = value => {
-//     localStorage.setItem(name, value);
-//     setStorage(value);
-//   };
-
-//   const removeFromStorage = () => {
-//     localStorage.removeItem(name);
-//     setStorage();
-//   };
-
-//   return [storage, placeInStorage, removeFromStorage];
-// };
 
 const FormikLogin = withFormik({
   mapPropsToValues({ username, password }) {

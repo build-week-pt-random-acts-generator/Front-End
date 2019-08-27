@@ -108,14 +108,12 @@ const FormikSignUp = withFormik({
 
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      // .post("https://reqres.in/api/users", values)
       .post("https://random-acts0519.herokuapp.com/api/register", values)
       .then(result => {
         console.log("handleSubmit: ", result);
         setStatus(result.data);
-        resetForm("https://random-acts0519.herokuapp.com/api/register", values);
+        resetForm();
       })
-      .post()
       .catch(err => {
         console.log("handleSubmit: ", err);
       });
