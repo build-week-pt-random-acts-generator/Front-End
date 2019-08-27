@@ -31,3 +31,23 @@
     transform: rotate(360deg);
   }
 }
+
+.fieldFull {
+  min-width: 100%;
+}
+
+.formContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  width: 45%;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
