@@ -62,7 +62,7 @@ const FormikLogin = withFormik({
     axios
       .post("https://random-acts0519.herokuapp.com/api/login", values)
       .then(result => {
-        console.log("handleSubmit: ", result);
+        console.log("Login | handleSubmit: ", result);
         setStatus(result.data);
         localStorage.setItem("token", result.data.token);
         localStorage.setItem("userId", result.data.userId);

@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
-import axios from "axios";
+import { axiosWithAuth } from "./AxiosAuth.js";
 
 const ActionsAddForm = ({ errors, touched, values, status }) => {
   const [newAction, setNewAction] = useState([]);
 
   useEffect(() => {
-    if (newAction) {
+    if (status) {
       setNewAction([...newAction, status]);
     }
   }, [newAction]);
 
   return (
-    //   <div>Action Add Form</div>
-
     <div>
       <Form className="actionAddForm">
         <h1>Add To The List</h1>
         <Field
-          type="input"
+          className="addActionText"
+          component="textarea"
+          rows="6"
+          cols="50"
           name="action"
           placeholder="Add New Action Here"
-          className="fieldFull"
+          // className="fieldFull"
         />
+        {touched.action && errors.action && (
+          <p className="errors">{errors.action}</p>
+        )}
+        <button>Add Action</button>
       </Form>
     </div>
   );
@@ -41,6 +46,17 @@ const FormikActionsAddForm = withFormik({
   }),
 
   handleSubmit(values, { setStatus, resetForm }) {
-    axios.post();
+    axiosWithAuth()
+      .post("https://random-acts0519.herokuapp.com/api/actions", values)
+      .then(result => {
+        console.log("New Act | handleSubmit:", result);
+        setStatus(result.data);
+        resetForm();
+      })
+      .catch(err => {
+        console.log("New Act | handleSubmit:", err);
+      });
   }
-});
+})(ActionsAddForm);
+
+export default FormikActionsAddForm;

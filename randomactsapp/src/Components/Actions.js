@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import * as Yup from "yup";
-import { withFormik, Form, Field } from "formik";
-import axios from "axios";
 import { axiosWithAuth } from "./AxiosAuth.js";
+import FormikActionsAddForm from "./ActionsAddForm.js";
 
 const ActionsList = props => {
   const [actions, setActions] = useState([]);
@@ -24,13 +22,12 @@ const ActionsList = props => {
 
   return (
     <div className="actionsContainer">
+      <FormikActionsAddForm />
       <div className="actionList">
         {actions.map(action => (
           <ActionList key={action.id} action={action} />
         ))}
       </div>
-
-      <div>action form</div>
     </div>
   );
 };
