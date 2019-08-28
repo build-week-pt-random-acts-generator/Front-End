@@ -29,9 +29,9 @@ const AppRouter = () => {
       <Route path="/signup" component={SignUp} />
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} />
-      <PrivateRouter path="/contacts" component={Contacts} />
+      <PrivateRouter path="/contacts/id" component={Contacts} />
       <PrivateRouter path="/actions" component={Actions} />
-      <PrivateRouter path="/randomacts" component={RandomActs} />
+      <PrivateRouter path="/randomacts/id" component={RandomActs} />
     </div>
   );
 };

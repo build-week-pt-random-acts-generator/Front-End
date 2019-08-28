@@ -10,7 +10,7 @@ const ActionsList = props => {
   useEffect(() => {
     const getActions = () => {
       axiosWithAuth()
-        .get("https://random-acts0519.herokuapp.com/api/actions")
+        .get(`https://random-acts0519.herokuapp.com/api/actions `)
         .then(result => {
           console.log("Contacts Data:", result);
           setActions(result.data);
