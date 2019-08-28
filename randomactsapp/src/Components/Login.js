@@ -64,7 +64,7 @@ const FormikLogin = withFormik({
       .then(result => {
         console.log("handleSubmit: ", result);
         setStatus(result.data);
-        localStorage.setItem(result.data.userId, result.data.token);
+        localStorage.setItem("token", result.data.token);
         resetForm();
       })
       .catch(err => {
