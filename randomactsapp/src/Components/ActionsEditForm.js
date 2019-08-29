@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
 import { axiosWithAuth } from "./AxiosAuth.js";
 
-const ActionsAddForm = ({ errors, touched, values, status }) => {
+const ActionsEditForm = ({ errors, touched, values, status }) => {
   const [newAction, setNewAction] = useState([]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const ActionsAddForm = ({ errors, touched, values, status }) => {
   );
 };
 
-const FormikActionsAddForm = withFormik({
+const FormikActionsEditForm = withFormik({
   mapPropsToValues({ action }) {
     return {
       action: action || ""
@@ -46,7 +46,7 @@ const FormikActionsAddForm = withFormik({
 
   handleSubmit(values, { setStatus, resetForm }) {
     axiosWithAuth()
-      .post("https://random-acts0519.herokuapp.com/api/actions", values)
+      .put("https://random-acts0519.herokuapp.com/api/actions", values)
       .then(result => {
         console.log("New Act | handleSubmit:", result);
         setStatus(result.data);
@@ -56,6 +56,6 @@ const FormikActionsAddForm = withFormik({
         console.log("New Act | handleSubmit:", err);
       });
   }
-})(ActionsAddForm);
+})(ActionsEditForm);
 
-export default FormikActionsAddForm;
+export default FormikActionsEditForm;
