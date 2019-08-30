@@ -7,7 +7,7 @@ const ActionsList = props => {
     <div className="actionsContainer">
       <div className="actionList">
         {props.actions.map(action => (
-          <ActionCard action={action} />
+          <ActionCard key={action.id} action={action} />
         ))}
       </div>
     </div>

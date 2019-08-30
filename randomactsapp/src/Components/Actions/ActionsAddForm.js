@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { axiosWithAuth } from "../AxiosAuth.js";
 
 const ActionsAddForm = props => {
   const [newAction, setNewAction] = useState({
     action: ""
   });
-
-  console.log("Props In Form: ", props);
 
   const changeHandler = event => {
     setNewAction({ ...newAction, [event.target.name]: event.target.value });
