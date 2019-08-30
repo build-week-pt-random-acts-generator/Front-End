@@ -5,11 +5,14 @@ const Nav = props => {
   const handleClick = () => {
     localStorage.clear();
   };
+
+  const id = localStorage.getItem("userId");
+
   return (
     <div className="navBar">
-      <NavLink to="/contacts">Contacts</NavLink>
-      <NavLink to="/actions">Actions</NavLink>
-      <NavLink to="/randomacts">Random Act</NavLink>
+      <NavLink to={`/contacts/${id}`}>Contacts</NavLink>
+      <NavLink to={`/actions`}>Actions</NavLink>
+      <NavLink to={`/randomacts/${id}`}>Random Act</NavLink>
       <NavLink onClick={handleClick} to="/logout">
         Log Out
       </NavLink>

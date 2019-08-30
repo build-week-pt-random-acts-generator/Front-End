@@ -4,8 +4,6 @@ import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 
 const Login = ({ errors, touched, values, status }) => {
-  // const [token, setToken, removeToken] = useCustomHook("token");
-
   const [user, setUser] = useState([]);
 
   useEffect(() => {
@@ -15,11 +13,6 @@ const Login = ({ errors, touched, values, status }) => {
   }, [status]);
 
   return (
-    // <div>
-    //   {token ? <LoggedIn /> : <NewUserForm />}
-    //   <button onClick={() => setToken("myToken")}>Log In</button>
-    //   <button onClick={() => removeToken()}>Log Out</button>
-    // </div>
     <div>
       <h1>Login Below</h1>
       <Form className="formContainer">
@@ -69,9 +62,10 @@ const FormikLogin = withFormik({
     axios
       .post("https://random-acts0519.herokuapp.com/api/login", values)
       .then(result => {
-        console.log("handleSubmit: ", result);
+        console.log("Login | handleSubmit: ", result);
         setStatus(result.data);
-        localStorage.setItem(result.data.userId, result.data.token);
+        localStorage.setItem("token", result.data.token);
+        localStorage.setItem("userId", result.data.userId);
         resetForm();
       })
       .catch(err => {
